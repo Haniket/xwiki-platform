@@ -17,27 +17,39 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.xwiki.like;
+package org.xwiki.grading;
 
-import org.xwiki.observation.event.Event;
 import org.xwiki.stability.Unstable;
 
 /**
- * An event sent when a Like action is performed.
- *
- * The following information are sent along with the event:
- *   - source: a {@link org.xwiki.user.UserReference} of the user who performs the like
- *   - data: the {@link org.xwiki.model.reference.EntityReference} being target of the like.
+ * Generic exception for Grading API.
  *
  * @version $Id$
- * @since 12.7RC1
+ * @since 12.8RC1
  */
 @Unstable
-public class LikeEvent implements Event
+public class GradingException extends Exception
 {
-    @Override
-    public boolean matches(Object otherEvent)
+    private static final long serialVersionUID = -2229233170941158972L;
+
+    /**
+     * Default constructor with message.
+     *
+     * @param message Cause of the exception.
+     */
+    public GradingException(String message)
     {
-        return otherEvent instanceof LikeEvent;
+        super(message);
+    }
+
+    /**
+     * Default constructor with message and parent exception.
+     *
+     * @param message Cause of the exception.
+     * @param throwable Parent of the exception.
+     */
+    public GradingException(String message, Throwable throwable)
+    {
+        super(message, throwable);
     }
 }

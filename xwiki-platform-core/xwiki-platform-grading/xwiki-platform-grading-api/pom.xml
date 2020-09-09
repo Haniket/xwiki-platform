@@ -24,44 +24,40 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.xwiki.platform</groupId>
-    <artifactId>xwiki-platform-like</artifactId>
+    <artifactId>xwiki-platform-grading</artifactId>
     <version>12.8-SNAPSHOT</version>
   </parent>
-  <artifactId>xwiki-platform-like-api</artifactId>
-  <name>XWiki Platform - Like - API</name>
+  <artifactId>xwiki-platform-grading-api</artifactId>
   <packaging>jar</packaging>
+  <name>XWiki Platform - Grading - API</name>
+  <description>API to grade xwiki entities</description>
   <properties>
-    <xwiki.jacoco.instructionRatio>0.78</xwiki.jacoco.instructionRatio>
-    <checkstyle.suppressions.location>${basedir}/src/checkstyle/checkstyle-suppressions.xml</checkstyle.suppressions.location>
+    <!-- Name to display by the Extension Manager -->
+    <xwiki.extension.name>Grading API</xwiki.extension.name>
     <!-- Needs to be installed on root to be able to use Solr Store -->
     <xwiki.extension.namespaces>{root}</xwiki.extension.namespaces>
+    <checkstyle.suppressions.location>${basedir}/src/checkstyle/checkstyle-suppressions.xml</checkstyle.suppressions.location>
+    <xwiki.jacoco.instructionRatio>0.80</xwiki.jacoco.instructionRatio>
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.xwiki.platform</groupId>
-      <artifactId>xwiki-platform-model-api</artifactId>
-      <version>${project.version}</version>
+      <groupId>org.xwiki.commons</groupId>
+      <artifactId>xwiki-commons-component-api</artifactId>
+      <version>${commons.version}</version>
     </dependency>
     <dependency>
       <groupId>org.xwiki.platform</groupId>
-      <artifactId>xwiki-platform-user-api</artifactId>
+      <artifactId>xwiki-platform-search-solr-api</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <!-- Test dependencies -->
     <dependency>
-      <groupId>org.xwiki.platform</groupId>
-      <artifactId>xwiki-platform-grading-api</artifactId>
-      <version>${project.version}</version>
+      <groupId>org.xwiki.commons</groupId>
+      <artifactId>xwiki-commons-tool-test-component</artifactId>
+      <version>${commons.version}</version>
+      <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.xwiki.platform</groupId>
-      <artifactId>xwiki-platform-configuration-default</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.xwiki.platform</groupId>
-      <artifactId>xwiki-platform-rendering-async-default</artifactId>
-      <version>${project.version}</version>
-    </dependency>
+    <!-- Required in order to mock XWikiContext -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>

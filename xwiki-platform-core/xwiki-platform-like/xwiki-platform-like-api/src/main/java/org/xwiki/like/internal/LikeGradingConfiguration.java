@@ -17,27 +17,57 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.xwiki.like;
+package org.xwiki.like.internal;
 
-import org.xwiki.observation.event.Event;
-import org.xwiki.stability.Unstable;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+import org.xwiki.component.annotation.Component;
+import org.xwiki.grading.GradingConfiguration;
 
 /**
- * An event sent when a Like action is performed.
- *
- * The following information are sent along with the event:
- *   - source: a {@link org.xwiki.user.UserReference} of the user who performs the like
- *   - data: the {@link org.xwiki.model.reference.EntityReference} being target of the like.
+ * Default {@link GradingConfiguration} for Likes.
  *
  * @version $Id$
- * @since 12.7RC1
+ * @since 12.8RC1
  */
-@Unstable
-public class LikeEvent implements Event
+@Component
+@Singleton
+@Named(LikeGradingConfiguration.RANKING_MANAGER_HINT)
+public class LikeGradingConfiguration implements GradingConfiguration
 {
+    /**
+     * Default hint for Ranking Manager.
+     */
+    public static final String RANKING_MANAGER_HINT = "like";
+
     @Override
-    public boolean matches(Object otherEvent)
+    public boolean storeZero()
     {
-        return otherEvent instanceof LikeEvent;
+        return false;
+    }
+
+    @Override
+    public int getScale()
+    {
+        return 1;
+    }
+
+    @Override
+    public boolean hasDedicatedCore()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean storeAverage()
+    {
+        return false;
+    }
+
+    @Override
+    public String getStorageHint()
+    {
+        return "solr";
     }
 }

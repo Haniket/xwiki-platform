@@ -43,7 +43,7 @@
   #if ($newCounterOptional.isPresent())
     #set ($discard = $services.like.cleanCacheUIX())
     #jsonResponse({
-      'counter': $newCounterOptional.get().likeNumber
+      'counter': $newCounterOptional.get()
     })
   #end
 #elseif ($request.xaction == "unlike" &amp;&amp; $services.csrf.isTokenValid($request.form_token))
@@ -52,7 +52,7 @@
     #if ($newCounterOptional.isPresent())
     #set ($discard = $services.like.cleanCacheUIX())
       #jsonResponse({
-        'counter': $newCounterOptional.get().likeNumber
+        'counter': $newCounterOptional.get()
       })
     #end
 #end
@@ -367,14 +367,12 @@
         <cache>0</cache>
         <disabled>0</disabled>
         <displayType>select</displayType>
-        <freeText>forbidden</freeText>
-        <largeStorage>0</largeStorage>
         <multiSelect>1</multiSelect>
         <name>async_context</name>
         <number>4</number>
         <prettyName>Context elements</prettyName>
         <relationalStorage>0</relationalStorage>
-        <separator> </separator>
+        <separator>, </separator>
         <separators>|, </separators>
         <size>5</size>
         <unmodifiable>0</unmodifiable>
@@ -489,9 +487,9 @@
 &lt;/div&gt;
 #end
 #if ($services.like.displayButton($doc))
-  #set ($optLikeRecord = $services.like.getLikes($doc))
-  #if ($optLikeRecord.isPresent())
-    #set ($likeRecord = $optLikeRecord.get())
+  #set ($optLikeCount = $services.like.getLikes($doc))
+  #if ($optLikeCount.isPresent())
+    #set ($likeCount = $optLikeCount.get())
     #set ($discard = $xwiki.ssx.use('XWiki.Like.LikeUIX'))
     #set ($discard = $xwiki.jsx.use('XWiki.Like.LikeUIX'))
     &lt;div class="like-container"&gt;
@@ -506,8 +504,8 @@
       #if (!$services.like.isAuthorized($doc))
         #set ($disabledButton = "disabled")
       #end
-      &lt;div class="like-button btn $btnClass $disabledButton badge" title="$escapetool.xml($services.localization.render('like.button.title', [$likeRecord.likeNumber]))"&gt;
-          $services.icon.renderHTML('heart') &lt;span class="like-number"&gt;$likeRecord.likeNumber&lt;/span&gt;
+      &lt;div class="like-button btn $btnClass $disabledButton badge" title="$escapetool.xml($services.localization.render('like.button.title', [$likeCount]))"&gt;
+          $services.icon.renderHTML('heart') &lt;span class="like-number"&gt;$likeCount&lt;/span&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   #end

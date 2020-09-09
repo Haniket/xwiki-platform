@@ -1,0 +1,6 @@
+org.xwiki.grading.internal.AverageGradingSolrCoreInitializer
+org.xwiki.grading.internal.DefaultGradingConfiguration
+org.xwiki.grading.internal.DefaultGradingManager
+org.xwiki.grading.internal.DefaultGradingManagerFactory
+org.xwiki.grading.internal.GradingSolrCoreInitializer
+org.xwiki.grading.script.GradingScriptService

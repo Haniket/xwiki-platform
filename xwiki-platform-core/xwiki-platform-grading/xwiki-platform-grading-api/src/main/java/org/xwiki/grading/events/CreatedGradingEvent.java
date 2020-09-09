@@ -17,30 +17,28 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.xwiki.like.internal;
+package org.xwiki.grading.events;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
-import org.apache.solr.client.solrj.SolrClient;
-import org.xwiki.component.annotation.Component;
-import org.xwiki.ratings.internal.SolrRatingsManager;
-import org.xwiki.search.solr.SolrException;
-
+import org.xwiki.observation.event.Event;
+import org.xwiki.grading.Grading;
+import org.xwiki.grading.GradingManager;
+import org.xwiki.stability.Unstable;
 
 /**
- * Custom Rating Manager for Like using Solr.
+ * Event sent whenever a new {@link Grading} is recorded.
+ * The event is sent with the following informations:
+ *   - source: the identifier of the {@link GradingManager}
+ *   - data: the {@link Grading} created.
  *
  * @version $Id$
- * @since 12.7RC1
+ * @since 12.8RC1
  */
-@Component
-@Singleton
-@Named("like/solr")
-public class LikeSolrRatingManager extends SolrRatingsManager
+@Unstable
+public class CreatedGradingEvent implements Event
 {
-    protected SolrClient getSolrClient() throws SolrException
+    @Override
+    public boolean matches(Object otherEvent)
     {
-        return this.solr.getClient(LikeSolrCoreInitializer.NAME);
+        return otherEvent instanceof CreatedGradingEvent;
     }
 }

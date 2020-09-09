@@ -17,28 +17,35 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.xwiki.like.internal;
+package org.xwiki.grading.internal;
 
-import javax.inject.Named;
+import org.junit.jupiter.api.Test;
+import org.xwiki.test.junit5.mockito.ComponentTest;
+import org.xwiki.test.junit5.mockito.InjectMockComponents;
 
-import org.xwiki.component.annotation.Component;
-import org.xwiki.ratings.internal.RatingCoreSolrInitializer;
-
-import groovy.lang.Singleton;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Custom Core initializer for storing Likes.
+ * Tests for {@link DefaultGradingConfiguration}.
  *
  * @version $Id$
- * @since 12.7RC1
+ * @since 12.8RC1
  */
-@Singleton
-@Named(LikeSolrCoreInitializer.NAME)
-@Component
-public class LikeSolrCoreInitializer extends RatingCoreSolrInitializer
+@ComponentTest
+public class DefaultGradingConfigurationTest
 {
-    /**
-     * Name of the Solr core.
-     */
-    public static final String NAME = "like";
+    @InjectMockComponents
+    private DefaultGradingConfiguration configuration;
+
+    @Test
+    void defaultValues()
+    {
+        assertEquals("solr", configuration.getStorageHint());
+        assertTrue(configuration.storeZero());
+        assertFalse(configuration.hasDedicatedCore());
+        assertEquals(5, configuration.getScale());
+        assertTrue(configuration.storeAverage());
+    }
 }

@@ -117,16 +117,43 @@
                  cannot be empty.
 
                  Note: you can use regexes by using the syntax: <regex>true</regex>
-                 Don't forget to '\'-escape dots and other special characters in this case ;)
+                 Don't forget to '\'-escape dots and other special characters in this case ;) -->
             <revapi.ignore>
               <item>
+                <code>java.method.returnTypeChanged</code>
+                <old>method org.xwiki.like.LikedEntity org.xwiki.like.LikeManager::getEntityLikes(org.xwiki.model.reference.EntityReference) throws org.xwiki.like.LikeException</old>
+                <new>method long org.xwiki.like.LikeManager::getEntityLikes(org.xwiki.model.reference.EntityReference) throws org.xwiki.like.LikeException</new>
+                <justification>Unstable API: not breaking.</justification>
+              </item>
+              <item>
+                <code>java.method.addedToInterface</code>
+                <new>method java.util.List&lt;org.xwiki.user.UserReference&gt; org.xwiki.like.LikeManager::getLikers(org.xwiki.model.reference.EntityReference, int, int) throws org.xwiki.like.LikeException</new>
+                <justification>Unstable API: not breaking.</justification>
+              </item>
+                <item>
+                <code>java.method.numberOfParametersChanged</code>
+                <old>method java.util.List&lt;org.xwiki.like.LikedEntity&gt; org.xwiki.like.LikeManager::getUserLikes(org.xwiki.user.UserReference) throws org.xwiki.like.LikeException</old>
+                <new>method java.util.List&lt;org.xwiki.model.reference.EntityReference&gt; org.xwiki.like.LikeManager::getUserLikes(org.xwiki.user.UserReference, int, int) throws org.xwiki.like.LikeException</new>
+                <justification>Unstable API: not breaking.</justification>
+              </item>
+                <item>
+                <code>java.method.returnTypeChanged</code>
+                <old>method org.xwiki.like.LikedEntity org.xwiki.like.LikeManager::saveLike(org.xwiki.user.UserReference, org.xwiki.model.reference.EntityReference) throws org.xwiki.like.LikeException</old>
+                <new>method long org.xwiki.like.LikeManager::saveLike(org.xwiki.user.UserReference, org.xwiki.model.reference.EntityReference) throws org.xwiki.like.LikeException</new>
+                <justification>Unstable API: not breaking.</justification>
+              </item>
+                <item>
                 <code>java.class.removed</code>
-                <old>class org.xwiki.velocity.tools.CollectionsTool</old>
-                <justification>Not a Breakage. Moved to Legacy</justification>
+                <old>interface org.xwiki.like.LikedEntity</old>
+                <justification>Unstable API: not breaking.</justification>
+              </item>
+                <item>
+                <code>java.method.numberOfParametersChanged</code>
+                <old>method java.util.List&lt;org.xwiki.like.LikedEntity&gt; org.xwiki.like.script.LikeScriptService::getUserLikes(org.xwiki.user.UserReference)</old>
+                <new>method java.util.List&lt;org.xwiki.model.reference.EntityReference&gt; org.xwiki.like.script.LikeScriptService::getUserLikes(org.xwiki.user.UserReference, int, int)</new>
+                <justification>Unstable API: not breaking.</justification>
               </item>
             </revapi.ignore>
-            -->
-            
           </analysisConfiguration>
         </configuration>
       </plugin>
@@ -164,6 +191,7 @@
     <module>xwiki-platform-flamingo</module>
     <module>xwiki-platform-flavor</module>
     <module>xwiki-platform-formula</module>
+    <module>xwiki-platform-grading</module>
     <module>xwiki-platform-graphviz</module>
     <module>xwiki-platform-groovy</module>
     <module>xwiki-platform-help</module>

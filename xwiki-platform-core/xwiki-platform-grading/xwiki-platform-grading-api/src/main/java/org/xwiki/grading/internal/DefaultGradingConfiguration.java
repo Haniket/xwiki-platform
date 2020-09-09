@@ -17,27 +17,52 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.xwiki.like;
+package org.xwiki.grading.internal;
 
-import org.xwiki.observation.event.Event;
-import org.xwiki.stability.Unstable;
+import javax.inject.Singleton;
+
+import org.xwiki.component.annotation.Component;
+import org.xwiki.grading.GradingConfiguration;
 
 /**
- * An event sent when a Like action is performed.
- *
- * The following information are sent along with the event:
- *   - source: a {@link org.xwiki.user.UserReference} of the user who performs the like
- *   - data: the {@link org.xwiki.model.reference.EntityReference} being target of the like.
+ * Default configuration for Gradings.
+ * By default the configuration considers a scale of 5, doesn't use a dedicated core, stores the zero values and the
+ * average. And it uses the solr manager.
  *
  * @version $Id$
- * @since 12.7RC1
+ * @since 12.8RC1
  */
-@Unstable
-public class LikeEvent implements Event
+@Component
+@Singleton
+public class DefaultGradingConfiguration implements GradingConfiguration
 {
     @Override
-    public boolean matches(Object otherEvent)
+    public boolean storeZero()
     {
-        return otherEvent instanceof LikeEvent;
+        return true;
+    }
+
+    @Override
+    public int getScale()
+    {
+        return 5;
+    }
+
+    @Override
+    public boolean hasDedicatedCore()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean storeAverage()
+    {
+        return true;
+    }
+
+    @Override
+    public String getStorageHint()
+    {
+        return "solr";
     }
 }
